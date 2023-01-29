@@ -1,5 +1,6 @@
 # API FOR CREATING DATABASE TABLES
-from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
+from sqlalchemy.orm import relationship
 from database import Base
 
 
@@ -11,6 +12,7 @@ class User(Base):
     first_name = Column(String)
     last_name = Column(String)
     is_active = Column(Boolean)
+    task = relationship("Task", back_populates="user")
 
 
 class Task(Base):
@@ -20,3 +22,5 @@ class Task(Base):
     description = Column(String)
     priority = Column(Integer)
     status = Column(String)
+    user_id = Column(Integer, ForeignKey(column="user.id"))
+    user = relationship("User", back_populates="task")
