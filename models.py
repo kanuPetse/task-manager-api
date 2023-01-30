@@ -12,6 +12,7 @@ class User(Base):
     first_name = Column(String)
     last_name = Column(String)
     is_active = Column(Boolean)
+    hashed_password = Column(String)
     task = relationship("Task", back_populates="user")
 
 
